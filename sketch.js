@@ -13,6 +13,7 @@ function setup() {
   bg.addImage("bg",bgimg)
   hotballon=createSprite(200,200,10,10)
   hotballon.addImage(hotballonimg)
+  database.ref("ballon/position").on("value",readPosition)
 }
 
 function draw() {
@@ -35,7 +36,7 @@ function draw() {
 }
 
 function writePosition(x,y){
-  database.ref('hotballon/position').set({
+  database.ref('ballon/position').set({
     'x': position.x + x ,
     'y': position.y + y
   })
@@ -44,8 +45,8 @@ function writePosition(x,y){
 function readPosition(data){
   position = data.val();
   console.log(position.x);
-  hypnoticBall.x = position.x;
-  hypnoticBall.y = position.y;
+  hotballon.x = position.x;
+  hotballon.y = position.y;
 }
 
 function showError(){
